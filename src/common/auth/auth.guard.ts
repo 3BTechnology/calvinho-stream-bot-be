@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
       }
     }
 
-    response.clearCookie('jwt');
+    response.clearCookie('token');
 
     throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
   }
