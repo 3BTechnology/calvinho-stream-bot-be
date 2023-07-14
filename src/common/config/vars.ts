@@ -9,4 +9,5 @@ export const searchStreamUrl = <string>process.env.TWITCH_SEARCH_STREAM_URL;
 export const twitchClientId = <string>process.env.TWITCH_CLIENT_ID;
 export const discordClientId = <string>process.env.DISCORD_CLIENT_ID;
 export const discordSecret = <string>process.env.DISCORD_CLIENT_SECRET;
+export const discordCallbackUrl = <string>process.env.DISCORD_CALLBACK_URL;
 export const port = process.env.PORT;
