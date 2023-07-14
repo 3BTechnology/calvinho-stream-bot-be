@@ -3,13 +3,14 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { UserRepository } from '../user/user.repository';
 import { DiscordStrategy } from './strategies/discord.strategy';
+import { secret } from 'src/common/config/vars';
 
 @Module({
   imports: [
     JwtModule.registerAsync({
       useFactory: async () => {
         return {
-          secret: process.env.SECRET || '12345',
+          secret: secret,
           signOptions: {
             noTimestamp: false,
           },
