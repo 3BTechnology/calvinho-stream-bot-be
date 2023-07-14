@@ -2,10 +2,15 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './user.repository';
+import { JWTProps } from './types';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly jwtService: JwtService,
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
     const checkIfUserExist = await this.userRepository.findOneByEmail(
@@ -29,6 +34,14 @@ export class UserService {
     }
 
     return checkIfUserExist;
+  }
+
+  async me(token: string) {
+    const decoded = this.jwtService.decode(token) as JWTProps;
+    if (!decoded || !decoded.email) {
+      throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+    }
+    return this.userRepository.findOneByEmail(decoded.email);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
