@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-discord';
 import { AuthService } from '../auth.service';
-import { discordClientId, discordSecret } from 'src/common/config/vars';
+import {
+  discordCallbackUrl,
+  discordClientId,
+  discordSecret,
+} from 'src/common/config/vars';
 import { Profile } from 'passport-discord';
 
 @Injectable()
@@ -11,7 +15,7 @@ export class DiscordStrategy extends PassportStrategy(Strategy, 'discord') {
     super({
       clientID: discordClientId,
       clientSecret: discordSecret,
-      callbackURL: 'http://localhost:3000/auth/discord/callback',
+      callbackURL: discordCallbackUrl,
       scope: ['identify', 'email'],
     });
   }
