@@ -9,6 +9,8 @@ import { AuthController } from './modules/auth/auth.controller';
 import { DiscordStrategy } from './modules/auth/strategies/discord.strategy';
 import { AuthService } from './modules/auth/auth.service';
 import { UserRepository } from './modules/user/user.repository';
+import { GuildService } from './modules/guild/guild.service';
+import { GuildRepository } from './modules/guild/guild.repository';
 
 @Module({
   imports: [UserModule, PrismaModule, AuthModule],
@@ -19,6 +21,8 @@ import { UserRepository } from './modules/user/user.repository';
     DiscordStrategy,
     AuthService,
     UserRepository,
+    GuildService,
+    GuildRepository,
   ],
 })
 export class AppModule {}
