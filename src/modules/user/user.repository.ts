@@ -14,6 +14,9 @@ export class UserRepository {
       where: {
         id: id,
       },
+      include: {
+        Guild: true,
+      },
     });
   }
 
@@ -21,6 +24,9 @@ export class UserRepository {
     return await this.prismaService.user.findUnique({
       where: {
         email: email,
+      },
+      include: {
+        Guild: true,
       },
     });
   }
